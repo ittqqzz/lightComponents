@@ -1,6 +1,7 @@
 import jsonp from 'common/js/jsonp'
 import axios from 'axios'
 import {commonParams, options} from './config'
+import {baseUrl} from './config'
 
 /* 获取推荐数据的方法 */
 export function getRecommend() {
@@ -10,12 +11,14 @@ export function getRecommend() {
     uin: 0,
     needNewCode: 1
   })
+  // 这里是模仿视频，通过 jsonp 实现跨域
+  // 之后将使用 axios 来获取数据，同时换一个 url,新的 url 语义会更加明确
   return jsonp(url, data, options)
 }
 
 
 export function getDiscList() {
-  return axios.get('http://apimusic.leanapp.cn/singList').then((res) => {
+  return axios.get(baseUrl + '/singList').then((res) => {
     return Promise.resolve(res.data)
   })
 }
